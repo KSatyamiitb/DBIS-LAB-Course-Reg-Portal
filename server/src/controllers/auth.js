@@ -176,21 +176,14 @@ exports.registration = async (req, res) => {
   try {
     var cur_year = 2010
     var cur_sem = 'Spring'
-    var result = await db.query('select * from student where ID = $1',[req.user.id])
-    var result2 = await db.query('select * from takes where ID = $1 and ( year < $2 or (year = $2 and semester < $3))  ORDER BY year desc, semester desc',[req.user.id, cur_year, cur_sem])
-    var result3 = await db.query('select * from takes where ID = $1 and year = $2 and semester = $3',[req.user.id, cur_year, cur_sem])
+    var result = await db.query('select (ROW_NUMBER() over() - 1) as id, course_id, title from (select distinct course_id , title from course natural join section where year = $1 and semester = $2 except select course_id, title from takes natural join course where year = $1 and semester = $2 and ID = $3) as foo',[cur_year, cur_sem, req.user.id])
+    // var result2 = await db.query('select * from takes where ID = $1 and ( year < $2 or (year = $2 and semester < $3))  ORDER BY year desc, semester desc',[req.user.id, cur_year, cur_sem])
+    // var result3 = await db.query('select * from takes where ID = $1 and year = $2 and semester = $3',[req.user.id, cur_year, cur_sem])
     
-    // console.log(result.rows)
+    console.log(result.rows)
     
     let payload = {
-      id: result.rows[0].id,
-      name: result.rows[0].name,
-      dept_name: result.rows[0].dept_name,
-      tot_cred: result.rows[0].tot_cred,
-      cur_courses: result3.rows,
-      courses: result2.rows,
-      cur_year: cur_year,
-      cur_sem: cur_sem
+      courses: result.rows
     }
     // console.log(payload)
 
@@ -205,8 +198,8 @@ exports.protected = async (req, res) => {
     var cur_year = 2010
     var cur_sem = 'Spring'
     var result = await db.query('select * from student where ID = $1',[req.user.id])
-    var result2 = await db.query('select * from takes where ID = $1 and ( year < $2 or (year = $2 and semester < $3))  ORDER BY year desc, semester desc',[req.user.id, cur_year, cur_sem])
-    var result3 = await db.query('select * from takes where ID = $1 and year = $2 and semester = $3',[req.user.id, cur_year, cur_sem])
+    var result2 = await db.query('select * from takes natural join course where ID = $1 and ( year < $2 or (year = $2 and semester < $3))  ORDER BY year desc, semester desc',[req.user.id, cur_year, cur_sem])
+    var result3 = await db.query('select * from takes natural join course where ID = $1 and year = $2 and semester = $3',[req.user.id, cur_year, cur_sem])
     
     // console.log(result.rows)
     

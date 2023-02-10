@@ -66,12 +66,12 @@ const Dashboard = () => {
           COURSES :
           <br></br>
           {protectedData.data.cur_courses.map((course) => (
-            <li>{course.course_id}, {course.semester}, {course.year}, {course.sec_id}, {course.grade}     <button onClick={() => drop(course)} className='btn btn-primary'>
+            <li>{course.course_id}, {course.title}, {course.semester}, {course.year}, {course.sec_id}, {course.grade}     <button onClick={() => drop(course)} className='btn btn-primary'>
             drop
           </button></li>
           ))}
           {protectedData.data.courses.map((course) => (
-            <li>{course.course_id}, {course.semester}, {course.year}, {course.sec_id}, {course.grade}</li>
+            <li>{course.course_id}, {course.title}, {course.semester}, {course.year}, {course.sec_id}, {course.grade}</li>
           ))}
         </p>
 
