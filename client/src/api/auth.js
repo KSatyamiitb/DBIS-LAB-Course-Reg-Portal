@@ -16,6 +16,13 @@ export async function ondrop(course) {
   return await axios.post('http://localhost:8000/home', course)
 }
 
+export async function onRegister(courseData) {
+  return await axios.post(
+    'http://localhost:8000/home/register',
+    courseData
+  )
+}
+
 export async function onLogout() {
   return await axios.get('http://localhost:8000/logout')
 }

@@ -11,6 +11,7 @@ const {
   dropcourse,
   logout,
   set_pass,
+  registerForCourse//New
 } = require('../controllers/auth')
 const {
   validationMiddleware,
@@ -30,5 +31,6 @@ router.post('/home', dropcourse)
 router.post('/set_pswd', registerValidation, validationMiddleware, set_pass)
 router.post('/login', loginValidation, validationMiddleware, login)
 router.get('/logout', logout)
+router.post('/home/register', registerForCourse)//New
 
 module.exports = router
