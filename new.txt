@@ -1,1 +1,5 @@
-Hi
+create table user_password
+    (ID   	 varchar(5),
+     hashed_password    varchar(80) 
+    );
+
