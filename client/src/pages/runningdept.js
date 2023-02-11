@@ -48,9 +48,6 @@ const RunningDept = () => {
         {protectedData.data.depts.map((dept) => (
             <li><a href={`/course/running/${dept.dept_name}`}>{dept.dept_name}</a></li>
         ))}
-        <button onClick={() => logout()} className='btn btn-primary'>
-          Logout
-        </button>
       </Layout>
     </div>
   )

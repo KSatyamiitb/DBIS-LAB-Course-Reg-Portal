@@ -70,9 +70,6 @@ const Course = () => {
 
           }
         </script> */}
-        <button onClick={() => logout()} className='btn btn-primary'>
-          Logout
-        </button>
       </Layout>
     </div>
   )

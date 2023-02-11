@@ -24,7 +24,6 @@ const Dashboard = () => {
     try {
       console.log(course)
       await ondrop(course)
-      // setLoading(true)
     } catch (error) {
       console.log(error.response)
     }
@@ -33,9 +32,10 @@ const Dashboard = () => {
 
   const protectedInfo = async () => {
     try {
+      console.log("2222222222")
       var data  = await fetchUserInfo()
-      setProtectedData(data)
       console.log(data)
+      setProtectedData(data)
 
       setLoading(false)
     } catch (error) {
@@ -66,18 +66,16 @@ const Dashboard = () => {
           COURSES :
           <br></br>
           {protectedData.data.cur_courses.map((course) => (
-            <li>{course.course_id}, {course.title}, {course.semester}, {course.year}, {course.sec_id}, {course.grade}     <button onClick={() => drop(course)} className='btn btn-primary'>
-            drop
-          </button></li>
+            <li>{course.course_id}, {course.title}, {course.semester}, {course.year}, {course.sec_id}, {course.grade}   <> </>
+              <button onClick={() => drop(course)} className='btn btn-primary'>
+              drop
+              </button>
+            </li>
           ))}
           {protectedData.data.courses.map((course) => (
             <li>{course.course_id}, {course.title}, {course.semester}, {course.year}, {course.sec_id}, {course.grade}</li>
           ))}
         </p>
-
-        <button onClick={() => logout()} className='btn btn-primary'>
-          Logout
-        </button>
       </Layout>
     </div>
   )

@@ -9,6 +9,7 @@ import Dashboard from './pages/dashboard'
 import Register from './pages/register'
 import ASC from './pages/asc'
 import Login from './pages/login'
+import Logout from './pages/logout'
 import SetPswd from './pages/setpswd'
 import Dept from './pages/dept'
 import Course from './pages/course'
@@ -24,7 +25,7 @@ const PrivateRoutes = () => {
 
 const RestrictedRoutes = () => {
   const { isAuth } = useSelector((state) => state.auth)
-
+  console.log("111111111111")
   return <>{!isAuth ? <Outlet /> : <Navigate to='/home' />}</>
 }
 
@@ -41,6 +42,7 @@ const App = () => {
           <Route path='/course/:course_id' element={<Course />} />
           <Route path='/course/running/:dept_name' element={<Dept />} />
           <Route path='/instructor/:instructor_id' element={<Instructor />} />
+          <Route path='/logout' element={<Logout />} />
         </Route>
 
         <Route element={<RestrictedRoutes />}>

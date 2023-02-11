@@ -26,6 +26,10 @@ const Navbar = () => {
             <NavLink to='/home/registration' className='mx-3'>
               <span>Register</span>
             </NavLink>
+
+            <NavLink to='/logout'>
+              <span>Logout</span>
+            </NavLink>
           </div>
         ) : (
           <div>

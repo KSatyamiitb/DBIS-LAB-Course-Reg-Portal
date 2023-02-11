@@ -47,8 +47,9 @@ const loginFieldsCheck = check('user_id').custom(async (value, { req }) => {
   }
   // console.log(value)
 
+  console.log("IN LOGIN VALIDATOR")
   var user = await db.query('SELECT * from user_password WHERE id = $1', [value])
-
+  console.log(user.rows)
 
   if (!user.rowCount) {
     throw new Error('Password not set for given user_id.')
@@ -63,7 +64,9 @@ const loginFieldsCheck = check('user_id').custom(async (value, { req }) => {
     throw new Error('Wrong password')
   }
 
+  console.log("IN LOGIN VALIDATOR vvvv")
   req.user = user.rows[0]
+  console.log("IN LOGIN VALIDATOR nnnn")
 })
 
 module.exports = {

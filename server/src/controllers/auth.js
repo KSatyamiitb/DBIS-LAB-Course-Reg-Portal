@@ -2,8 +2,20 @@ const db = require('../db')
 const { hash, genSalt } = require('bcryptjs')
 const dom = require('react-router-dom')
 const saltRounds = 10
-const { sign } = require('jsonwebtoken')
-const { SECRET } = require('../constants')
+// const { sign } = require('jsonwebtoken')
+// const { SECRET } = require('../constants')
+
+const getCurYear = async () => {
+  try{
+    let curtime = Date.now()
+    console.log(curtime)
+    await db.query('select year,semester from reg_dates ')
+
+    return res.status(200)
+  } catch (error) {
+    console.log(error.message)
+  }
+}
 
 exports.getUsers = async (req, res) => {
   try {
@@ -44,7 +56,9 @@ exports.set_pass = async (req, res) => {
 exports.login = async (req, res) => {
   let user = req.user
 
-  // console.log(user)
+  console.log("IN LOGIN VALIDATOR")
+  console.log(user)
+  console.log("IN LOGIN VALIDATOR")
 
   let payload = {
     id: user.id,
@@ -54,9 +68,11 @@ exports.login = async (req, res) => {
   // console.log(payload)
 
   try {
-    const token = await sign(payload, SECRET)
-
-    return res.status(200).cookie('token', token, { httpOnly: true }).json({
+    // const token = await sign(payload, SECRET)
+    req.session.loggedin = true
+    req.session.user_id = user.id
+    console.log(req.session)
+    return res.status(200).json({
       success: true,
       message: 'Logged in succefully',
     })
@@ -156,7 +172,7 @@ exports.getinstructor = async (req, res) => {
     // console.log(id)
     var result = await db.query('select name, dept_name from instructor where id = $1',[id])
     var result2 = await db.query('select course_id, title from teaches natural join course where year = $1 and semester = $2 and ID = $3 order by course_id asc',[cur_year, cur_sem, id])
-    var result3 = await db.query('select distinct course_id, title, year, semester from teaches natural join course where (year < $1 or (year = $1 and semester < $2)) and ID = $3 order by year desc, semester desc',[cur_year, cur_sem, id])
+    var result3 = await db.query('select id, course_id, title, year, semester from teaches natural join course where id = $3 and (year < $1 or (year = $1 and semester != $2)) order by year desc, case when semester = \'Spring\' then 1 when semester = \'Summer\' then 2  when semester = \'Fall\' then 3 when semester = \'Winter\' then 4 end desc',[cur_year, cur_sem, id])
     // console.log(result.rows)
     let payload = {
       about: result.rows[0],
@@ -197,9 +213,13 @@ exports.protected = async (req, res) => {
   try {
     var cur_year = 2010
     var cur_sem = 'Spring'
+    console.log(req.user)
     var result = await db.query('select * from student where ID = $1',[req.user.id])
+    console.log("entered 2")
     var result2 = await db.query('select * from takes natural join course where ID = $1 and ( year < $2 or (year = $2 and semester < $3))  ORDER BY year desc, semester desc',[req.user.id, cur_year, cur_sem])
+    console.log("entered 3")
     var result3 = await db.query('select * from takes natural join course where ID = $1 and year = $2 and semester = $3',[req.user.id, cur_year, cur_sem])
+    console.log("entered 4")
     
     // console.log(result.rows)
     
@@ -213,7 +233,7 @@ exports.protected = async (req, res) => {
       cur_year: cur_year,
       cur_sem: cur_sem
     }
-    // console.log(payload)
+    console.log(payload)
 
     return res.status(200).end(JSON.stringify(payload))
   } catch (error) {
@@ -224,10 +244,17 @@ exports.protected = async (req, res) => {
 
 exports.logout = async (req, res) => {
   try {
-    return res.status(200).clearCookie('token', { httpOnly: true }).json({
-      success: true,
-      message: 'Logged out succefully',
-    })
+    if(req.session.loggedin){
+      req.session.loggedin = false
+      req.session.destroy();
+      res.status(200).json({
+        success: true,
+        message: 'Logged out succefully',
+      })
+    }
+    else{
+        res.send('already logged out ')
+    }
   } catch (error) {
     console.log(error.message)
     return res.status(500).json({

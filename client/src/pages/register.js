@@ -10,6 +10,7 @@ const Register = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const [protectedData, setProtectedData] = useState(null)
+  const [searchtext, setSearchText] = useState(null)
   var items = null
 
   const logout = async () => {
@@ -44,20 +45,26 @@ const Register = () => {
   }, [])
 
 
-  const handleOnSearch = (string, results) => {
+  const handleOnSearch = async (string, results) => {
     // onSearch will have as the first callback parameter
     // the string searched and for the second the results.
+    console.log("handle on search")
+    await setSearchText(string)
+    console.log("searchtext : ", searchtext)
     console.log(string, results)
   }
 
   const handleOnHover = (result) => {
     // the item hovered
+    console.log("HOVER")
     console.log(result)
   }
 
-  const handleOnSelect = (item) => {
+  const handleOnSelect = async (item) => {
     // the item selected
     console.log('SELECTED')
+    await setSearchText(item.course_id)
+    console.log("searchtext : ", searchtext)
     console.log(item)
   }
 
@@ -92,7 +99,7 @@ const Register = () => {
             onFocus={handleOnFocus}
             autoFocus
             formatResult={formatResult}
-          />
+        />
       </Layout>
     </div>
   )
