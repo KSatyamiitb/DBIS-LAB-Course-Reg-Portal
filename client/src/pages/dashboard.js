@@ -20,11 +20,15 @@ const Dashboard = () => {
     }
   }
 
+  function refreshPage() {
+    window.location.reload();
+}
+
   const drop = async (course) => {
     try {
       console.log(course)
       await ondrop(course)
-      // setLoading(true)
+      refreshPage()
     } catch (error) {
       console.log(error.response)
     }
@@ -34,8 +38,13 @@ const Dashboard = () => {
   const protectedInfo = async () => {
     try {
       var data  = await fetchUserInfo()
-      setProtectedData(data)
       console.log(data)
+      // data.data.courses.map((sem)=>(
+      //   sem.rows.map((item)=>console.log(item.split(',')))
+      // ))
+      console.log("111111")
+      setProtectedData(data)
+      console.log("2222222")
 
       setLoading(false)
     } catch (error) {
@@ -70,8 +79,27 @@ const Dashboard = () => {
             drop
           </button></li>
           ))}
-          {protectedData.data.courses.map((course) => (
-            <li>{course.course_id}, {course.semester}, {course.year}, {course.sec_id}, {course.grade}</li>
+          {protectedData.data.courses.map((row)=>(
+          <><h2>YEAR:{row.year} SEMESTER:{row.semester}</h2><table>
+              <thead>
+                <tr>
+                  <th>Course Code</th>
+                  <th>Course Name</th>
+                  <th>Section</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                {row.rows.map((item) => (
+                  <tr>
+                  <td>{item.split(',')[1]}</td>
+                  <td>{item.split(',')[2]}</td>
+                  <td>{item.split(',')[3]}</td>
+                  <td>{item.split(',')[4]}</td>
+                </tr>
+                ))}
+              </tbody>
+            </table></>
           ))}
         </p>
 

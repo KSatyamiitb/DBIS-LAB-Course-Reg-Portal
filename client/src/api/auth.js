@@ -16,6 +16,14 @@ export async function ondrop(course) {
   return await axios.post('http://localhost:8000/home', course)
 }
 
+//New
+export async function onRegister(courseData) {
+  return await axios.post(
+    'http://localhost:8000/home/register',
+    courseData
+  )
+}
+
 export async function onLogout() {
   return await axios.get('http://localhost:8000/logout')
 }
@@ -33,14 +41,9 @@ export async function fetchRunDeptInfo() {
 }
 
 export async function fetchRunDeptCourseInfo(dept_name) {
-  return await axios.get(`http://localhost:8000/home/rundept/${dept_name}`, dept_name)
+  const x = await axios.post('http://localhost:8000/home/rundeptcourse', dept_name)
+  console.log(x)
+  return x
 }
 
-export async function fetchCourseInfo(course_id) {
-  return await axios.get(`http://localhost:8000/home/${course_id}`, course_id)
-}
-
-export async function fetchInstructorInfo(id) {
-  return await axios.get(`http://localhost:8000/home/instructor/${id}`, id)
-}
 

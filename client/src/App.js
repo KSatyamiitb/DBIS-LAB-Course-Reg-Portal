@@ -11,8 +11,6 @@ import ASC from './pages/asc'
 import Login from './pages/login'
 import SetPswd from './pages/setpswd'
 import Dept from './pages/dept'
-import Course from './pages/course'
-import Instructor from './pages/instructor'
 import RunningDept from './pages/runningdept'
 import { useSelector } from 'react-redux'
 
@@ -38,9 +36,7 @@ const App = () => {
           <Route path='/home' element={<Dashboard />} />
           <Route path='/home/registration' element={<Register />} />
           <Route path='/course/running' element={<RunningDept />} />
-          <Route path='/course/:course_id' element={<Course />} />
           <Route path='/course/running/:dept_name' element={<Dept />} />
-          <Route path='/instructor/:instructor_id' element={<Instructor />} />
         </Route>
 
         <Route element={<RestrictedRoutes />}>
