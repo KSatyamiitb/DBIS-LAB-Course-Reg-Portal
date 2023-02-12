@@ -22,16 +22,6 @@ const Dashboard = () => {
     }
   }
 
-  const drop = async (course) => {
-    try {
-      console.log(course)
-      await ondrop(course)
-      window.location.reload()
-    } catch (error) {
-      console.log(error.response)
-    }
-  }
-
 
   const protectedInfo = async () => {
     try {
@@ -46,6 +36,19 @@ const Dashboard = () => {
   useEffect(() => {
     protectedInfo()
   }, [])
+
+  function refreshPage() {
+      window.location.reload(false);
+  }
+
+  const drop = async (course) => {
+    try {
+      console.log(course)
+      await ondrop(course)
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
 
   return loading ? (
     <Layout>
@@ -74,7 +77,9 @@ const Dashboard = () => {
               </thead>
               <tbody>
                 {protectedData.data.cur_courses.map((course) => (
-                  <tr><td>{course.course_id}</td><td>{course.title}</td><td>{course.sec_id}</td><td><button onClick={() => drop(course)} >
+                  <tr><td>{course.course_id}</td><td>{course.title}</td><td>{course.sec_id}</td><td><button onClick={() => {
+                    drop(course)
+                    refreshPage()}} >
                   Drop</button></td></tr>
                 ))}
               </tbody>
