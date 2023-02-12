@@ -47,13 +47,22 @@ const Course = () => {
   ) : (
     <div>
       <Layout>
-        <h1>{course.course_id}     {protectedData.data.about.title}</h1>
+        {/* <h1>{course.course_id}     {protectedData.data.about.title}</h1>
         <h3>Parent Dept : {protectedData.data.about.dept_name} </h3>
-        <h3>Credits : {protectedData.data.about.credits} </h3>
-        <h3>Prerequisites :</h3>
+        <h3>Credits : {protectedData.data.about.credits} </h3> */}
+        <h3>Course details </h3>
+        <table>
+              <tbody>
+                  <tr><td style={{ fontWeight: 'bold' }}>Course Title</td><td>{protectedData.data.about.title}</td></tr>
+                  <tr><td style={{ fontWeight: 'bold' }}>ID</td><td>{course.course_id}</td></tr>
+                  <tr><td style={{ fontWeight: 'bold' }}>Department</td><td>{protectedData.data.about.dept_name}</td></tr>
+                  <tr><td style={{ fontWeight: 'bold' }}>Credits</td><td>{protectedData.data.about.credits}</td></tr>
+              </tbody>
+            </table>
+        <h3>Prerequisites </h3>
         {protectedData.data.prereq.map((pre) => (
               <li><a href={`/course/${pre.prereq_id}`}>{pre.prereq_id}  {pre.title}</a></li>))}
-        <h3>Instructors :</h3>
+        <h3>Instructors </h3>
         {protectedData.data.instructors.map((ins) => (
               <li><a href={`/instructor/${ins.id}`}>{ins.name} (ID: {ins.id})</a></li>))}
         {/* <p id="demo"></p>

@@ -48,13 +48,21 @@ const Course = () => {
   ) : (
     <div>
       <Layout>
-        <h1>Prof. {protectedData.data.about.name}</h1>
+        {/* <h1>Prof. {protectedData.data.about.name}</h1>
         <h3>ID : {ins.instructor_id}</h3>
-        <h3>Dept : {protectedData.data.about.dept_name} </h3>
-        <h3>Active Courses :</h3>
+        <h3>Dept : {protectedData.data.about.dept_name} </h3> */}
+        <h3>Instructor Details </h3>
+        <table>
+              <tbody>
+                  <tr><td style={{ fontWeight: 'bold' }}>Professor Name</td><td>{protectedData.data.about.name}</td></tr>
+                  <tr><td style={{ fontWeight: 'bold' }}>ID</td><td>{ins.instructor_id}</td></tr>
+                  <tr><td style={{ fontWeight: 'bold' }}>Department</td><td>{protectedData.data.about.dept_name}</td></tr>
+              </tbody>
+            </table>
+        <h3>Active Courses </h3>
         {protectedData.data.cur_courses.map((cur) => (
               <li><a href={`/course/${cur.course_id}`}>{cur.course_id}  {cur.title}</a></li>))}
-        <h3>Past Courses :</h3>
+        <h3>Past Courses </h3>
         {protectedData.data.past_courses.map((past) => (
               <li>{past.course_id}  {past.title}  {past.year}  {past.semester}</li>))}
         {/* <p id="demo"></p>

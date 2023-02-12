@@ -22,12 +22,12 @@ const Logout = () => {
     <div>
       <Layout>
         <h1>Logout ? </h1>
-        <p>Are you sure you want to logout ?</p>        
+        <p style={{fontSize: '24px'}}>Are you sure you want to logout ?</p>        
         <Link to={'/home'}>
-          <button className='btn btn-primary' > No </button>
+          <button style={{fontSize: '24px'}}> No </button>
         </Link>
         <space> </space>
-        <button onClick={() => logout()} className='btn btn-primary'>
+        <button onClick={() => logout()} style={{fontSize: '24px'}}>
           Yes
         </button>
       </Layout>

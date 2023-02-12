@@ -174,7 +174,7 @@ const Register = () => {
             ))}
           </select>
         </td>
-        <td><button onClick={() => registerCourse(rowData,selectedValue)} className='btn btn-primary'>Register</button>
+        <td><button onClick={() => registerCourse(rowData,selectedValue)} >Register</button>
         </td>
       </tr>
     );

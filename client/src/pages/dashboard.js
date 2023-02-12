@@ -57,7 +57,7 @@ const Dashboard = () => {
   ) : (
     <div>
       <Layout>
-        <h1>Home</h1>
+        <h3>Student Details</h3>
           <table>
               <tbody>
                   <tr><td style={{ fontWeight: 'bold' }}>ID</td><td>{protectedData.data.id}</td></tr>

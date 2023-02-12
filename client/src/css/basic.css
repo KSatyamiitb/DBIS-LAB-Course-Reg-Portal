@@ -29,27 +29,29 @@ h1, h2, h3, h4, h5, h6 {
   
   li {
     color: #333;
-    font-size: 24px;
+    font-size: 18px;
     list-style: none;
     padding: 10px 20px;
-    background-color: #f2f2f2;
-    border-bottom: 1px solid #ddd;
+    /* background-color: #f2f2f2;
+    border-bottom: 1px solid #ddd; */
+    background-color: #FBEAEB;
+    /* border-right: 2px solid black; */
   }
   
   li:hover {
-    background-color: #ddd;
+    background-color: #e5d6d7;
     cursor: pointer;
   }
   
   button {
-    background-color: #4CAF50; /* Green */
+    background-color: #dd7973; /* Green */
     border: none;
     color: white;
-    padding: 15px 32px;
+    /* padding: 15px 32px; */
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 5px;

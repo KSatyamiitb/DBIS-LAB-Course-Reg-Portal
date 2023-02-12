@@ -40,11 +40,11 @@ const user_idExists = check('user_id').custom(async (value) => {
     value,
   ])
 
-  // // const { rows_i } = await db.query('SELECT * from instructor WHERE ID = $1', [
-  // //   value,
-  // // ])
+  var rows_i = await db.query('SELECT * from instructor WHERE ID = $1', [
+    value,
+  ])
 
-  if (!rows.rowCount) {//&& !rows_i) {
+  if (!rows.rowCount && !rows_i.rowCount) {
     throw new Error('No such user exists.')
   }
 })
@@ -56,11 +56,11 @@ const loginFieldsCheck = check('user_id').custom(async (value, { req }) => {
   ])
   // console.log(rows)
 
-  // // const { rows_i } = await db.query('SELECT * from instructor WHERE ID = $1', [
-  // //   value,
-  // // ])
+  var rows_i = await db.query('SELECT * from instructor WHERE ID = $1', [
+    value,
+  ])
 
-  if (!rows.rowCount) {//&& !rows_i) {
+  if (!rows.rowCount && !rows_i.rowCount) {
     throw new Error('No such user exists.')
   }
   // console.log(value)

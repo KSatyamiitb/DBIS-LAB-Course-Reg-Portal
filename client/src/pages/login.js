@@ -37,7 +37,7 @@ const Login = () => {
         <h1>Login</h1>
 
         <div className='mb-3'>
-          <label htmlFor='user_id' className='form-label'>
+          <label htmlFor='user_id' className='form-label' style={{fontWeight:'bold',fontSize:'24px'}}>
             User_ID
           </label>
           <input
@@ -53,7 +53,7 @@ const Login = () => {
         </div>
 
         <div className='mb-3'>
-          <label htmlFor='password' className='form-label'>
+          <label htmlFor='password' className='form-label' style={{fontWeight:'bold',fontSize:'24px'}}>
             Password
           </label>
           <input
@@ -70,7 +70,7 @@ const Login = () => {
 
         <div style={{ color: 'red', margin: '10px 0' }}>{error}</div>
 
-        <button type='submit' className='btn btn-primary'>
+        <button type='submit' style={{fontSize:'24px'}}>
           Submit
         </button>
       </form>
