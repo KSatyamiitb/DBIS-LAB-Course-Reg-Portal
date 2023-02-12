@@ -16,7 +16,7 @@ const {
 const {
   validationMiddleware,
 } = require('../middlewares/validations-middleware')
-const { registerValidation, loginValidation } = require('../validators/auth')
+const { pswdValidation, registerValidation, loginValidation } = require('../validators/auth')
 const { auth, auth_login } = require('../middlewares/auth-middleware')
 const router = Router()
 
@@ -28,9 +28,9 @@ router.get('/home/rundept/:dept_name', auth, runningdeptcourses)
 router.get('/home/:course_id', auth, getcourse)
 router.get('/home/instructor/:instructor_id', auth, getinstructor)
 router.post('/home', dropcourse)
-router.post('/set_pswd', registerValidation, validationMiddleware, set_pass)
+router.post('/set_pswd', pswdValidation, validationMiddleware, set_pass)
 router.post('/login', loginValidation, validationMiddleware, login)
 router.get('/logout', logout)
-router.post('/home/register', registerForCourse)//New
+router.post('/home/register', registerValidation, validationMiddleware, registerForCourse)//New
 
 module.exports = router

@@ -244,20 +244,6 @@ exports.registerForCourse = async (req, res) => {
     const cur_year = cur.year
     console.log(req.body)
     
-    var prereq =await db.query('select prereq_id from prereq where prereq_id not in (select course_id from takes where ID=$1 and (year<$2 or (year=$2 and semester!=$3))) and course_id=$4',[id,cur_year,cur_sem,course_id])
-
-    console.log(prereq)
-
-    if (prereq.rowCount>=1) {
-      throw new Error('Prerequisites not satisfied! Registration unsuccessful.')
-    }
-
-    var timeclash=await db.query('select course_id from section natural join takes where ID=$1 and time_slot_id in (select time_slot_id from section where course_id=$2 and sec_id=$3 and semester=$4 and year=$5)',[id,course_id,sec_id,cur_sem,cur_year])
-    console.log(timeclash)
-    if(timeclash.rowCount>=1){
-      throw new Error('Time_slot clash! Registration unsuccessful.')
-    }
-
     const grade=null
 
     await db.query('Insert into takes(ID,course_id,sec_id,semester,year,grade) values($1,$2,$3,$4,$5,$6)',[id,course_id,sec_id,cur_sem,cur_year,grade])

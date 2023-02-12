@@ -11,6 +11,7 @@ const Register = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const [protectedData, setProtectedData] = useState(null)
+  const [error, setError] = useState(false)
 
   const logout = async () => {
     try {
@@ -46,6 +47,7 @@ const Register = () => {
   }
 
   const handleOnSearch = (string, results) => {
+    setError("")
     setProtectedData((prevState) => {
       console.log(prevState)
       return {
@@ -63,6 +65,7 @@ const Register = () => {
   };
 
   const handleOnSelect = (item) => {
+    setError("")
     setProtectedData((prevState) => {
       console.log(prevState)
       return {
@@ -80,6 +83,7 @@ const Register = () => {
   };
 
   const handleOnClear = () => {
+    setError("")
     refreshPage()
     console.log("Cleared");
   };
@@ -142,9 +146,11 @@ const Register = () => {
                       }
       console.log(courseData)
       await onRegister(courseData)
+      setError("")
       protectedInfo()
     } catch (error) {
-      console.log(error.response)
+      console.log(error.response.data.errors[0].msg)
+      setError(error.response.data.errors[0].msg)
     }
   }
 
@@ -198,6 +204,7 @@ const Register = () => {
           formatResult={formatResult}
           placeholder="Search for courses to register"
         />
+        <br></br>
         <table>
           <thead>
           <tr>
@@ -213,6 +220,8 @@ const Register = () => {
           ))}
           </tbody>
         </table>
+        <br></br>
+        <div style={{ color: 'red', margin: '10px 0' }}>{error}</div>
       </Layout>
     </div>
   )
