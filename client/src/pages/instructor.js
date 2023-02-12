@@ -8,7 +8,6 @@ import "../css/basic.css"
 
 const Course = () => {
   const ins = useParams()
-//   console.log(ins.instructor_id)
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const [protectedData, setProtectedData] = useState(null)
@@ -29,7 +28,7 @@ const Course = () => {
     try {
       var data  = await fetchInstructorInfo(ins.instructor_id)
       setProtectedData(data)
-      console.log(data)
+      // console.log(data)
 
       setLoading(false)
     } catch (error) {
@@ -48,9 +47,6 @@ const Course = () => {
   ) : (
     <div>
       <Layout>
-        {/* <h1>Prof. {protectedData.data.about.name}</h1>
-        <h3>ID : {ins.instructor_id}</h3>
-        <h3>Dept : {protectedData.data.about.dept_name} </h3> */}
         <h3>Instructor Details </h3>
         <table>
               <tbody>
@@ -65,20 +61,6 @@ const Course = () => {
         <h3>Past Courses </h3>
         {protectedData.data.past_courses.map((past) => (
               <li>{past.course_id}  {past.title}  {past.year}  {past.semester}</li>))}
-        {/* <p id="demo"></p>
-        <script>
-          let numberOuput1 = document.getElementById("demo");
-          let a = 1;
-          let isequal = protectedData.data.prereq.length == a;
-          numberOuput1.innerHTML = isequal;
-          {/* if ({protectedData.data.prereq.length == 0}) {
-            console.log("reached 1")
-            // document.getElementById("demo").innerHTML = " None "
-          } else {
-            console.log("reached 2")
-
-          }
-        </script> */}
       </Layout>
     </div>
   )

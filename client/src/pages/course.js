@@ -28,7 +28,7 @@ const Course = () => {
     try {
       var data  = await fetchCourseInfo(course.course_id)
       setProtectedData(data)
-      console.log(data)
+      // console.log(data)
 
       setLoading(false)
     } catch (error) {
@@ -47,9 +47,6 @@ const Course = () => {
   ) : (
     <div>
       <Layout>
-        {/* <h1>{course.course_id}     {protectedData.data.about.title}</h1>
-        <h3>Parent Dept : {protectedData.data.about.dept_name} </h3>
-        <h3>Credits : {protectedData.data.about.credits} </h3> */}
         <h3>Course details </h3>
         <table>
               <tbody>
@@ -65,20 +62,6 @@ const Course = () => {
         <h3>Instructors </h3>
         {protectedData.data.instructors.map((ins) => (
               <li><a href={`/instructor/${ins.id}`}>{ins.name} (ID: {ins.id})</a></li>))}
-        {/* <p id="demo"></p>
-        <script>
-          let numberOuput1 = document.getElementById("demo");
-          let a = 1;
-          let isequal = protectedData.data.prereq.length == a;
-          numberOuput1.innerHTML = isequal;
-          {/* if ({protectedData.data.prereq.length == 0}) {
-            console.log("reached 1")
-            // document.getElementById("demo").innerHTML = " None "
-          } else {
-            console.log("reached 2")
-
-          }
-        </script> */}
       </Layout>
     </div>
   )

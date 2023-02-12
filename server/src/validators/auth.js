@@ -54,7 +54,6 @@ const loginFieldsCheck = check('user_id').custom(async (value, { req }) => {
   var rows = await db.query('SELECT * from student WHERE ID = $1', [
     value,
   ])
-  // console.log(rows)
 
   var rows_i = await db.query('SELECT * from instructor WHERE ID = $1', [
     value,
@@ -63,7 +62,6 @@ const loginFieldsCheck = check('user_id').custom(async (value, { req }) => {
   if (!rows.rowCount && !rows_i.rowCount) {
     throw new Error('No such user exists.')
   }
-  // console.log(value)
 
   console.log("IN LOGIN VALIDATOR")
   var user = await db.query('SELECT * from user_password WHERE id = $1', [value])
@@ -72,11 +70,8 @@ const loginFieldsCheck = check('user_id').custom(async (value, { req }) => {
   if (!user.rowCount) {
     throw new Error('Password not set for given user_id.')
   }
-  // console.log(req.body.password)
-  // console.log(user.rows[0].hashed_password)
   
   const validPassword = await compare(req.body.password, user.rows[0].hashed_password)
-  // console.log(validPassword)
 
   if (!validPassword) {
     throw new Error('Wrong password')

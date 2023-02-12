@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   const drop = async (course) => {
     try {
-      console.log(course)
+      // console.log(course)
       await ondrop(course)
     } catch (error) {
       console.log(error.response)

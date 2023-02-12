@@ -11,7 +11,7 @@ const {
   dropcourse,
   logout,
   set_pass,
-  registerForCourse//New
+  registerForCourse
 } = require('../controllers/auth')
 const {
   validationMiddleware,

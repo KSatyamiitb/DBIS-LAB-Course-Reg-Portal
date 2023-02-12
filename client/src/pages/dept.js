@@ -28,7 +28,7 @@ const Dept = () => {
     try {
       var data  = await fetchRunDeptCourseInfo(dept.dept_name)
       setProtectedData(data)
-      console.log(data)
+      // console.log(data)
 
       setLoading(false)
     } catch (error) {

@@ -26,7 +26,7 @@ const RunningDept = () => {
     try {
       var data  = await fetchRunDeptInfo()
       setProtectedData(data)
-      console.log(data)
+      // console.log(data)
 
       setLoading(false)
     } catch (error) {

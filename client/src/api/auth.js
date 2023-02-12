@@ -2,10 +2,7 @@ import axios from 'axios'
 axios.defaults.withCredentials = true
 
 export async function onSetPswd(setPswdData) {
-  return await axios.post(
-    'http://localhost:8000/set_pswd',
-    setPswdData
-  )
+  return await axios.post('http://localhost:8000/set_pswd',setPswdData)
 }
 
 export async function onLogin(loginData) {
@@ -17,10 +14,7 @@ export async function ondrop(course) {
 }
 
 export async function onRegister(courseData) {
-  return await axios.post(
-    'http://localhost:8000/home/register',
-    courseData
-  )
+  return await axios.post('http://localhost:8000/home/register',courseData)
 }
 
 export async function onLogout() {

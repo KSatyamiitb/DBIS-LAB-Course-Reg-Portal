@@ -29,7 +29,7 @@ const Register = () => {
     try {
       var data  = await fetchRegistrationInfo()
       setProtectedData(data)
-      console.log(data)
+      // console.log(data)
 
       setLoading(false)
     } catch (error) {
@@ -49,7 +49,7 @@ const Register = () => {
   const handleOnSearch = (string, results) => {
     setError("")
     setProtectedData((prevState) => {
-      console.log(prevState)
+      // console.log(prevState)
       return {
         ...prevState,
         data:{...prevState.data,
@@ -67,7 +67,7 @@ const Register = () => {
   const handleOnSelect = (item) => {
     setError("")
     setProtectedData((prevState) => {
-      console.log(prevState)
+      // console.log(prevState)
       return {
         ...prevState,
         data:{...prevState.data,
@@ -101,42 +101,6 @@ const Register = () => {
     );
   };
 
-//   const all_run_courses= [
-//     {
-//       id: '1',
-//       course_id: 'CS-101',
-//       title: 'Intro. to Computer Science',
-//       sec_id: '1'
-//     },
-//     { id:'2',
-//       course_id: 'CS-315', title: 'Robotics', sec_id:
-//  '1' },
-//     { id:'3',course_id: 'CS-319', title: 'Image Processing', sec_id: '1' },
-//     { id:'4',course_id: 'CS-319', title: 'Image Processing', sec_id: '2' },
-//     { id:'5',course_id: 'FIN-201', title: 'Investment Banking', sec_id: '1' },
-//     { id:'6',course_id: 'HIS-351', title: 'World History', sec_id: '1' },
-//     {
-//       id:'7',
-//       course_id: 'MU-199',
-//       title: 'Music Video Production',
-//       sec_id: '1'
-//     }
-  // ]
-  // var all_run_array=JSON.parse()
-
-  // const fuseOptions_={
-  //     shouldSort: true,
-  //     threshold: 0.6,
-  //     location: 0,
-  //     distance: 100,
-  //     maxPatternLength: 32,
-  //     minMatchCharLength: 1,
-  //     keys: [
-  //       "cousrse_id",
-  //       "title"
-  //     ]
-  //   }
-
   const registerCourse = async (course,selectedValue) => {
     try {
       const courseData={id:protectedData.data.id,
@@ -144,7 +108,7 @@ const Register = () => {
                         sec_id:selectedValue,
                         title:course.title
                       }
-      console.log(courseData)
+      // console.log(courseData)
       await onRegister(courseData)
       setError("")
       protectedInfo()
@@ -158,7 +122,7 @@ const Register = () => {
     const [selectedValue, setSelectedValue] = useState(rowData.sec_id[0]);
     const handleChange = event => {
       setSelectedValue(event.target.value);
-      console.log(selectedValue)
+      // console.log(selectedValue)
     };
   
     return (
@@ -190,7 +154,6 @@ const Register = () => {
       <Layout>
         <h1>Registration Details</h1>
         <ReactSearchAutocomplete
-          // items={all_run_courses}
           items={protectedData.data.all_run_courses}
           fuseOptions={{keys:["course_id","title"]}}
           resultStringKeyName="title"

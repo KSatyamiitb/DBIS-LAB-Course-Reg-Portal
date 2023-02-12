@@ -26,9 +26,6 @@ table {
     border-right: none;
   }
 
-  /* tr:hover {
-    background-color: #f5f5f5;
-  } */
 
   .table-container {
     display: flex;

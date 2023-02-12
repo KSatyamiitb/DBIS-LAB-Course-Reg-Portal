@@ -12,7 +12,6 @@ const Navbar = () => {
           <NavLink to='/'>
             <span>ASC</span>
           </NavLink>
-        {/* </div> */}
 
         {isAuth ? (
           <>
