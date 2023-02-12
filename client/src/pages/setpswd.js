@@ -36,7 +36,7 @@ const SetPswd = () => {
         <h1>Set Password</h1>
 
         <div className='mb-3'>
-          <label htmlFor='user_id' className='form-label'>
+          <label htmlFor='user_id' className='form-label' style={{fontWeight:'bold',fontSize:'24px'}}>
             User_ID
           </label>
           <input
@@ -52,7 +52,7 @@ const SetPswd = () => {
         </div>
 
         <div className='mb-3'>
-          <label htmlFor='password' className='form-label'>
+          <label htmlFor='password' className='form-label' style={{fontWeight:'bold',fontSize:'24px'}}>
             Password
           </label>
           <input
@@ -70,7 +70,7 @@ const SetPswd = () => {
         <div style={{ color: 'red', margin: '10px 0' }}>{error}</div>
         <div style={{ color: 'green', margin: '10px 0' }}>{success}</div>
 
-        <button type='submit' className='btn btn-primary'>
+        <button type='submit' style={{fontSize:'24px',backgroundColor: '#2F3C7E'}}>
           Submit
         </button>
       </form>

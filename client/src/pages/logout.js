@@ -24,10 +24,10 @@ const Logout = () => {
         <h1>Logout ? </h1>
         <p style={{fontSize: '24px'}}>Are you sure you want to logout ?</p>        
         <Link to={'/home'}>
-          <button style={{fontSize: '24px'}}> No </button>
+          <button style={{fontSize:'24px',backgroundColor: '#2F3C7E'}}> No </button>
         </Link>
         <space> </space>
-        <button onClick={() => logout()} style={{fontSize: '24px'}}>
+        <button onClick={() => logout()} style={{fontSize:'24px',backgroundColor: '#2F3C7E'}}>
           Yes
         </button>
       </Layout>

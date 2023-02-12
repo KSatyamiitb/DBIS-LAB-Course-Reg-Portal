@@ -70,7 +70,7 @@ const Login = () => {
 
         <div style={{ color: 'red', margin: '10px 0' }}>{error}</div>
 
-        <button type='submit' style={{fontSize:'24px'}}>
+        <button type='submit' style={{fontSize:'24px',backgroundColor: '#2F3C7E'}}>
           Submit
         </button>
       </form>
