@@ -1,4 +1,5 @@
 import Layout from '../components/layout'
+import "../css/basic.css"
 
 const ASC = () => {
   return (

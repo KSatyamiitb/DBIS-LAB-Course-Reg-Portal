@@ -288,7 +288,7 @@ exports.protected = async (req, res) => {
     var third_sem='Fall'
     var result = await db.query('select * from student where ID = $1',[req.user.id])
     var result2 = await db.query('select * from takes where ID = $1 and ( year < $2 or (year = $2 and semester < $3))  ORDER BY year desc, semester desc',[req.user.id, cur_year, cur_sem])
-    var result3 = await db.query('select * from takes where ID = $1 and year = $2 and semester = $3',[req.user.id, cur_year, cur_sem])
+    var result3 = await db.query('select * from takes natural join course where ID = $1 and year = $2 and semester = $3',[req.user.id, cur_year, cur_sem])
     var result4 = await db.query('select year,semester, array_agg(id||\',\'||course_id||\',\'||title||\',\'||sec_id||\',\'||grade ) as rows from takes natural join course where ID=$1 and (year<$2 or (year=$2 and semester!=$3)) group by year,semester order by year desc,case when semester=\'Spring\' then 1 when semester=\'Summer\' then 2 when semester=\'Fall\' then 3 else 4 end desc ',[req.user.id,cur_year,cur_sem])
 
     console.log(result4.rows)

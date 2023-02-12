@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { fetchCourseInfo, onLogout} from '../api/auth'
 import Layout from '../components/layout'
 import { unauthenticateUser } from '../redux/slices/authSlice'
+import "../css/basic.css"
 
 const Course = () => {
   const course = useParams()

@@ -1,0 +1,43 @@
+table {
+    width: 100%;
+    border: 2px solid black;
+    margin-bottom: 50px;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 2px solid #0d0d0d;
+  }
+
+  td {
+    background-color: #FBEAEB;
+    border-right: 2px solid #dddddd02;
+  }
+  
+  th {
+    background-color: #2F3C7E;
+    font-weight: bold;
+    border-right: 2px solid black;
+    color: white;
+  }
+  
+  td:last-child {
+    border-right: none;
+  }
+
+  /* tr:hover {
+    background-color: #f5f5f5;
+  } */
+
+  .table-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+  }
+  
+  .table {
+    width: 45%;
+  }
+
+  

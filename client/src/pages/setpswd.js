@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { onSetPswd } from '../api/auth'
 import Layout from '../components/layout'
+import "../css/basic.css"
 
 const SetPswd = () => {
   const [values, setValues] = useState({

@@ -4,7 +4,8 @@ import { fetchRegistrationInfo, onLogout, onRegister } from '../api/auth'
 import Layout from '../components/layout'
 import { unauthenticateUser } from '../redux/slices/authSlice'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import "../css/register.css"
+import "../css/table.css"
+import "../css/basic.css"
 
 const Register = () => {
   const dispatch = useDispatch()

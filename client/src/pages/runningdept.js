@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { fetchRunDeptInfo, onLogout} from '../api/auth'
 import Layout from '../components/layout'
 import { unauthenticateUser } from '../redux/slices/authSlice'
+import "../css/basic.css"
 
 const RunningDept = () => {
   const dispatch = useDispatch()

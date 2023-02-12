@@ -3,6 +3,7 @@ import { onLogout} from '../api/auth'
 import Layout from '../components/layout'
 import { Link } from 'react-router-dom'
 import { unauthenticateUser } from '../redux/slices/authSlice'
+import "../css/basic.css"
 
 const Logout = () => {
   const dispatch = useDispatch()

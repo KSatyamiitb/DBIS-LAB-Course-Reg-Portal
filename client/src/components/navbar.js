@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import "../css/navbar.css"
 
 const Navbar = () => {
   const { isAuth } = useSelector((state) => state.auth)

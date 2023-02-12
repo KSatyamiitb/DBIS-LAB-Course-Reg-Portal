@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux'
 import { fetchUserInfo, onLogout, ondrop} from '../api/auth'
 import Layout from '../components/layout'
 import { unauthenticateUser } from '../redux/slices/authSlice'
+import "../css/table.css"
+import "../css/basic.css"
 
 const Dashboard = () => {
   const dispatch = useDispatch()
@@ -20,15 +22,11 @@ const Dashboard = () => {
     }
   }
 
-  function refreshPage() {
-    window.location.reload();
-}
-
   const drop = async (course) => {
     try {
       console.log(course)
       await ondrop(course)
-      refreshPage()
+      window.location.reload()
     } catch (error) {
       console.log(error.response)
     }
@@ -38,14 +36,7 @@ const Dashboard = () => {
   const protectedInfo = async () => {
     try {
       var data  = await fetchUserInfo()
-      console.log(data)
-      // data.data.courses.map((sem)=>(
-      //   sem.rows.map((item)=>console.log(item.split(',')))
-      // ))
-      console.log("111111")
       setProtectedData(data)
-      console.log("2222222")
-
       setLoading(false)
     } catch (error) {
       logout()
@@ -64,23 +55,32 @@ const Dashboard = () => {
     <div>
       <Layout>
         <h1>Home</h1>
-        <p>ID : {protectedData.data.id}
-          <br></br>
-          NAME : {protectedData.data.name}
-          <br></br>
-          DEPT : {protectedData.data.dept_name}
-          <br></br>
-          TOTAL CREDITS : {protectedData.data.tot_cred}
-          <br></br>
-          COURSES :
-          <br></br>
-          {protectedData.data.cur_courses.map((course) => (
-            <li>{course.course_id}, {course.semester}, {course.year}, {course.sec_id}, {course.grade}     <button onClick={() => drop(course)} className='btn btn-primary'>
-            drop
-          </button></li>
-          ))}
+          <table>
+              <tbody>
+                  <tr><td style={{ fontWeight: 'bold' }}>ID</td><td>{protectedData.data.id}</td></tr>
+                  <tr><td style={{ fontWeight: 'bold' }}>NAME</td><td>{protectedData.data.name}</td></tr>
+                  <tr><td style={{ fontWeight: 'bold' }}>DEPT</td><td>{protectedData.data.dept_name}</td></tr>
+                  <tr><td style={{ fontWeight: 'bold' }}>TOTAL CREDITS</td><td>{protectedData.data.tot_cred}</td></tr>
+              </tbody>
+            </table>
+          <h4><b>Current Courses : Year:</b>{protectedData.data.cur_year}<b> Semester:</b>{protectedData.data.cur_sem}</h4><table>
+              <thead>
+                <tr>
+                  <th>Course Code</th>
+                  <th>Course Name</th>
+                  <th>Section</th>
+                  <th>Drop</th>
+                </tr>
+              </thead>
+              <tbody>
+                {protectedData.data.cur_courses.map((course) => (
+                  <tr><td>{course.course_id}</td><td>{course.title}</td><td>{course.sec_id}</td><td><button onClick={() => drop(course)} >
+                  Drop</button></td></tr>
+                ))}
+              </tbody>
+              </table>
           {protectedData.data.courses.map((row)=>(
-          <><h2>YEAR:{row.year} SEMESTER:{row.semester}</h2><table>
+          <><h4><b>YEAR:</b>{row.year} <b>SEMESTER:</b>{row.semester}</h4><table>
               <thead>
                 <tr>
                   <th>Course Code</th>
@@ -101,7 +101,6 @@ const Dashboard = () => {
               </tbody>
             </table></>
           ))}
-        </p>
       </Layout>
     </div>
   )
